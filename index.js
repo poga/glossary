@@ -77,7 +77,7 @@ var Glossary = React.createClass({
         });
         return React.createElement(
             "div",
-            { className: "ui relaxed divided list" },
+            { className: "ui relaxed list" },
             list
         );
     }

@@ -49,7 +49,7 @@ let Glossary = React.createClass({
                         </div>
                     </div>)
         })
-        return (<div className="ui relaxed divided list">{list}</div>)
+        return (<div className="ui relaxed list">{list}</div>)
     }
 })
 
