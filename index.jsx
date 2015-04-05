@@ -1,3 +1,5 @@
+let ethercalc_host = "localhost:8000"
+
 let App = React.createClass({
     getInitialState() {
         return {filter: undefined }
@@ -11,6 +13,9 @@ let App = React.createClass({
     render() {
         return (<div className="ui segment">
             <Glossary filter={this.state.filter} onSelectTag={this.onSelectTag} onDeselectTag={this.onDeselectTag}/>
+            <div className="ui center aligned basic segment">
+                <a href={`http://${ethercalc_host}/bkuyf7icnz`}><div className="ui basic button">Edit</div></a>
+            </div>
         </div>)
     }
 })
@@ -20,7 +25,7 @@ let Glossary = React.createClass({
         return {items: []}
     },
     componentWillMount() {
-        $.getJSON("http://localhost:8000/_/bkuyf7icnz/csv.json", (it) => {
+        $.getJSON(`http://${ethercalc_host}/_/bkuyf7icnz/csv.json`, (it) => {
             it.slice(1).forEach((x) => {
                 this.setState({items: this.state.items.concat([x])})
             })
@@ -61,7 +66,7 @@ let Tag = React.createClass({
         let handler = this.props.selected ? this.props.onDeselectTag : this.props.onSelectTag
 
         return (<div className={"right floated compact ui button" + (this.props.selected ? " green" : "")}
-            onClick={handler.bind(this, this.props.label)}>
+            onClick={handler.bind(null, this.props.label)}>
             {this.props.label}
         </div>)
     }

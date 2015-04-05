@@ -1,5 +1,7 @@
 "use strict";
 
+var ethercalc_host = "localhost:8000";
+
 var App = React.createClass({
     displayName: "App",
 
@@ -16,7 +18,20 @@ var App = React.createClass({
         return React.createElement(
             "div",
             { className: "ui segment" },
-            React.createElement(Glossary, { filter: this.state.filter, onSelectTag: this.onSelectTag, onDeselectTag: this.onDeselectTag })
+            React.createElement(Glossary, { filter: this.state.filter, onSelectTag: this.onSelectTag, onDeselectTag: this.onDeselectTag }),
+            React.createElement(
+                "div",
+                { className: "ui center aligned basic segment" },
+                React.createElement(
+                    "a",
+                    { href: "http://" + ethercalc_host + "/bkuyf7icnz" },
+                    React.createElement(
+                        "div",
+                        { className: "ui basic button" },
+                        "Edit"
+                    )
+                )
+            )
         );
     }
 });
@@ -30,7 +45,7 @@ var Glossary = React.createClass({
     componentWillMount: function componentWillMount() {
         var _this = this;
 
-        $.getJSON("http://localhost:8000/_/bkuyf7icnz/csv.json", function (it) {
+        $.getJSON("http://" + ethercalc_host + "/_/bkuyf7icnz/csv.json", function (it) {
             it.slice(1).forEach(function (x) {
                 _this.setState({ items: _this.state.items.concat([x]) });
             });
@@ -95,7 +110,7 @@ var Tag = React.createClass({
         return React.createElement(
             "div",
             { className: "right floated compact ui button" + (this.props.selected ? " green" : ""),
-                onClick: handler.bind(this, this.props.label) },
+                onClick: handler.bind(null, this.props.label) },
             this.props.label
         );
     }
