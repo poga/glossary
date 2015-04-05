@@ -2,18 +2,9 @@ let ethercalc_host = "https://www.ethercalc.org"
 let doc_id = window.location.pathname
 
 let App = React.createClass({
-    getInitialState() {
-        return {filter: undefined }
-    },
-    onSelectTag(label) {
-        this.setState({filter: label})
-    },
-    onDeselectTag(label) {
-        this.setState({filter: undefined})
-    },
     render() {
         return (<div className="ui segment">
-            <Glossary filter={this.state.filter} onSelectTag={this.onSelectTag} onDeselectTag={this.onDeselectTag}/>
+            <Glossary filter={this.state.filter} />
             <div className="ui center aligned basic segment">
                 <a href={`${ethercalc_host}${doc_id}`}><div className="ui basic button">Edit</div></a>
             </div>
@@ -23,7 +14,13 @@ let App = React.createClass({
 
 let Glossary = React.createClass({
     getInitialState() {
-        return {items: []}
+        return {items: [], filter: undefined}
+    },
+    onSelectTag(label) {
+        this.setState({filter: label})
+    },
+    onDeselectTag(label) {
+        this.setState({filter: undefined})
     },
     componentWillMount() {
         $.getJSON(`${ethercalc_host}/_${doc_id}/csv.json`, (it) => {
@@ -42,9 +39,9 @@ let Glossary = React.createClass({
                 return (<Tag
                     label={t}
                     key={t}
-                    onSelectTag={this.props.onSelectTag}
-                    onDeselectTag={this.props.onDeselectTag}
-                    selected={t === this.props.filter}/>)
+                    onSelectTag={this.onSelectTag}
+                    onDeselectTag={this.onDeselectTag}
+                    selected={t === this.filter}/>)
             })
             return (<div className="item" key={x[0]}>
                         {tags}

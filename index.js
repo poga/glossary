@@ -6,20 +6,11 @@ var doc_id = window.location.pathname;
 var App = React.createClass({
     displayName: "App",
 
-    getInitialState: function getInitialState() {
-        return { filter: undefined };
-    },
-    onSelectTag: function onSelectTag(label) {
-        this.setState({ filter: label });
-    },
-    onDeselectTag: function onDeselectTag(label) {
-        this.setState({ filter: undefined });
-    },
     render: function render() {
         return React.createElement(
             "div",
             { className: "ui segment" },
-            React.createElement(Glossary, { filter: this.state.filter, onSelectTag: this.onSelectTag, onDeselectTag: this.onDeselectTag }),
+            React.createElement(Glossary, { filter: this.state.filter }),
             React.createElement(
                 "div",
                 { className: "ui center aligned basic segment" },
@@ -41,7 +32,13 @@ var Glossary = React.createClass({
     displayName: "Glossary",
 
     getInitialState: function getInitialState() {
-        return { items: [] };
+        return { items: [], filter: undefined };
+    },
+    onSelectTag: function onSelectTag(label) {
+        this.setState({ filter: label });
+    },
+    onDeselectTag: function onDeselectTag(label) {
+        this.setState({ filter: undefined });
     },
     componentWillMount: function componentWillMount() {
         var _this = this;
@@ -66,9 +63,9 @@ var Glossary = React.createClass({
                 return React.createElement(Tag, {
                     label: t,
                     key: t,
-                    onSelectTag: _this2.props.onSelectTag,
-                    onDeselectTag: _this2.props.onDeselectTag,
-                    selected: t === _this2.props.filter });
+                    onSelectTag: _this2.onSelectTag,
+                    onDeselectTag: _this2.onDeselectTag,
+                    selected: t === _this2.filter });
             });
             return React.createElement(
                 "div",
