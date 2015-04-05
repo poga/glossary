@@ -1,6 +1,7 @@
 "use strict";
 
 var ethercalc_host = "localhost:8000";
+var doc_id = window.location.pathname;
 
 var App = React.createClass({
     displayName: "App",
@@ -24,7 +25,7 @@ var App = React.createClass({
                 { className: "ui center aligned basic segment" },
                 React.createElement(
                     "a",
-                    { href: "http://" + ethercalc_host + "/bkuyf7icnz" },
+                    { href: "http://" + ethercalc_host + "" + doc_id },
                     React.createElement(
                         "div",
                         { className: "ui basic button" },
@@ -45,7 +46,7 @@ var Glossary = React.createClass({
     componentWillMount: function componentWillMount() {
         var _this = this;
 
-        $.getJSON("http://" + ethercalc_host + "/_/bkuyf7icnz/csv.json", function (it) {
+        $.getJSON("http://" + ethercalc_host + "/_" + doc_id + "/csv.json", function (it) {
             it.slice(1).forEach(function (x) {
                 _this.setState({ items: _this.state.items.concat([x]) });
             });

@@ -1,4 +1,5 @@
 let ethercalc_host = "localhost:8000"
+let doc_id = window.location.pathname
 
 let App = React.createClass({
     getInitialState() {
@@ -14,7 +15,7 @@ let App = React.createClass({
         return (<div className="ui segment">
             <Glossary filter={this.state.filter} onSelectTag={this.onSelectTag} onDeselectTag={this.onDeselectTag}/>
             <div className="ui center aligned basic segment">
-                <a href={`http://${ethercalc_host}/bkuyf7icnz`}><div className="ui basic button">Edit</div></a>
+                <a href={`http://${ethercalc_host}${doc_id}`}><div className="ui basic button">Edit</div></a>
             </div>
         </div>)
     }
@@ -25,7 +26,7 @@ let Glossary = React.createClass({
         return {items: []}
     },
     componentWillMount() {
-        $.getJSON(`http://${ethercalc_host}/_/bkuyf7icnz/csv.json`, (it) => {
+        $.getJSON(`http://${ethercalc_host}/_${doc_id}/csv.json`, (it) => {
             it.slice(1).forEach((x) => {
                 this.setState({items: this.state.items.concat([x])})
             })
