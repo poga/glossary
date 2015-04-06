@@ -63,7 +63,7 @@ let Tag = React.createClass({
     render() {
         let handler = this.props.selected ? this.props.onDeselectTag : this.props.onSelectTag
 
-        return (<div className={"right floated compact ui button" + (this.props.selected ? " green" : "")}
+        return (<div className={"right floated mini compact ui button" + (this.props.selected ? " green" : "")}
             onClick={handler.bind(null, this.props.label)}>
             {this.props.label}
         </div>)

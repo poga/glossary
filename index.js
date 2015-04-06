@@ -107,7 +107,7 @@ var Tag = React.createClass({
 
         return React.createElement(
             "div",
-            { className: "right floated compact ui button" + (this.props.selected ? " green" : ""),
+            { className: "right floated mini compact ui button" + (this.props.selected ? " green" : ""),
                 onClick: handler.bind(null, this.props.label) },
             this.props.label
         );
