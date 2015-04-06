@@ -4,7 +4,7 @@ let doc_id = window.location.pathname
 let App = React.createClass({
     render() {
         return (<div className="ui segment">
-            <Glossary filter={this.state.filter} />
+            <Glossary/>
             <div className="ui center aligned basic segment">
                 <a href={`${ethercalc_host}${doc_id}`}><div className="ui basic button">Edit</div></a>
             </div>
@@ -32,7 +32,7 @@ let Glossary = React.createClass({
     render() {
         let list = this.state.items.map((x) => {
             let tagStrs = x[2].split(",").map((x) => { return x.trim() })
-            if (this.props.filter !== undefined && tagStrs.indexOf(this.props.filter) === -1) {
+            if (this.state.filter !== undefined && tagStrs.indexOf(this.state.filter) === -1) {
                 return ""
             }
             let tags = tagStrs.map((t) => {
@@ -41,7 +41,7 @@ let Glossary = React.createClass({
                     key={t}
                     onSelectTag={this.onSelectTag}
                     onDeselectTag={this.onDeselectTag}
-                    selected={t === this.filter}/>)
+                    selected={t === this.state.filter}/>)
             })
             return (<div className="item" key={x[0]}>
                         {tags}

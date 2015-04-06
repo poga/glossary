@@ -10,7 +10,7 @@ var App = React.createClass({
         return React.createElement(
             "div",
             { className: "ui segment" },
-            React.createElement(Glossary, { filter: this.state.filter }),
+            React.createElement(Glossary, null),
             React.createElement(
                 "div",
                 { className: "ui center aligned basic segment" },
@@ -56,7 +56,7 @@ var Glossary = React.createClass({
             var tagStrs = x[2].split(",").map(function (x) {
                 return x.trim();
             });
-            if (_this2.props.filter !== undefined && tagStrs.indexOf(_this2.props.filter) === -1) {
+            if (_this2.state.filter !== undefined && tagStrs.indexOf(_this2.state.filter) === -1) {
                 return "";
             }
             var tags = tagStrs.map(function (t) {
@@ -65,7 +65,7 @@ var Glossary = React.createClass({
                     key: t,
                     onSelectTag: _this2.onSelectTag,
                     onDeselectTag: _this2.onDeselectTag,
-                    selected: t === _this2.filter });
+                    selected: t === _this2.state.filter });
             });
             return React.createElement(
                 "div",
